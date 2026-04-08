@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Masters 2026 Prediction Competition</title>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f6f4;
+}
+
+header {
+  background-color: #0b5d2a;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+.container {
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+}
+
+.rules {
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.form-section {
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+select, input, button {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+button {
+  background-color: #0b5d2a;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #08451f;
+}
+
+.deadline-warning {
+  color: red;
+  font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Masters 2026 Prediction Competition ⛳</h1>
+</header>
+
+<div class="container">
+
+<div class="rules">
+<h2>Competition Rules</h2>
+<ul>
+<li>Select <b>1 golfer from each of 6 tiers</b>.</li>
+<li>Each golfer earns <b>+10 points</b> per shot under par.</li>
+<li>If a golfer <b>misses the cut</b>, they receive <b>-50 points</b>.</li>
+<li>Your <b>best 4 scores</b> from 6 golfers count.</li>
+<li>Your <b>worst 2 scores</b> are discarded.</li>
+<li>The highest combined total wins the competition.</li>
+<li><b>Deadline:</b> Midnight Dublin Time — 8 April 2026.</li>
+</ul>
+<p id="deadlineMessage" class="deadline-warning"></p>
+</div>
+
+<div class="form-section">
+<h2>Submit Your Picks</h2>
+
+<input type="text" id="playerName" placeholder="Enter Your Name">
+
+<!-- Tier selects remain unchanged -->
+
+<select id="tier1">
+<option value="">Select Tier 1 Golfer</option>
+<option>Scottie Scheffler</option>
+<option>Rory McIlroy</option>
+<option>Bryson DeChambeau</option>
+<option>Jon Rahm</option>
+<option>Ludvig Aberg</option>
+<option>Tommy Fleetwood</option>
+<option>Xander Schauffele</option>
+<option>Collin Morikawa</option>
+<option>Cameron Young</option>
+<option>Matt Fitzpatrick</option>
+</select>
+
+<select id="tier2">
+<option value="">Select Tier 2 Golfer</option>
+<option>Justin Rose</option>
+<option>Patrick Reed</option>
+<option>Chris Gotterup</option>
+<option>Hideki Matsuyama</option>
+<option>Viktor Hovland</option>
+<option>Brooks Koepka</option>
+<option>Robert MacIntyre</option>
+<option>Justin Thomas</option>
+<option>Tyrrell Hatton</option>
+<option>Jordan Spieth</option>
+</select>
+
+<select id="tier3">
+<option value="">Select Tier 3 Golfer</option>
+<option>Shane Lowry</option>
+<option>Patrick Cantlay</option>
+<option>Ben Griffin</option>
+<option>Akshay Bhatia</option>
+<option>Si Woo Kim</option>
+<option>Jake Knapp</option>
+<option>Corey Conners</option>
+<option>Russell Henley</option>
+<option>Min Woo Lee</option>
+<option>Jason Day</option>
+</select>
+
+<select id="tier4">
+<option value="">Select Tier 4 Golfer</option>
+<option>Adam Scott</option>
+<option>Max Homa</option>
+<option>Cameron Smith</option>
+<option>Sepp Straka</option>
+<option>Sam Burns</option>
+<option>Daniel Berger</option>
+<option>Marco Penge</option>
+<option>Gary Woodland</option>
+<option>Sunjae Im</option>
+<option>Wyndham Clark</option>
+</select>
+
+<select id="tier5">
+<option value="">Select Tier 5 Golfer</option>
+<option>JJ Spaun</option>
+<option>Jacob Bridgeman</option>
+<option>Harris English</option>
+<option>Dustin Johnson</option>
+<option>Alexander Noren</option>
+<option>Matthew McCarthy</option>
+<option>Sergio Garcia</option>
+<option>Maverick McNealy</option>
+<option>Ryan Gerard</option>
+<option>Keegan Bradley</option>
+</select>
+
+<select id="tier6">
+<option value="">Select Tier 6 Golfer</option>
+<option>Brian Harman</option>
+<option>Ryan Fox</option>
+<option>Aaron Rai</option>
+<option>Tom Kim</option>
+<option>Sahith Theegala</option>
+<option>Nick Taylor</option>
+<option>Seamus Power</option>
+<option>Eric Cole</option>
+<option>Nick Dunlap</option>
+<option>Denny McCarthy</option>
+<option>Lucas Glover</option>
+<option>Kurt Kitayama</option>
+<option>Cameron Davis</option>
+<option>Emiliano Grillo</option>
+<option>Matt Wallace</option>
+<option>Adrian Meronk</option>
+<option>J.T. Poston</option>
+<option>Chris Kirk</option>
+<option>Brendon Todd</option>
+<option>Kevin Yu</option>
+</select>
+
+<button onclick="submitEntry()" id="submitButton">Submit Picks</button>
+
+</div>
+
+</div>
+
+<script>
+
+// DEADLINE: Midnight Dublin Time April 8 2026
+const deadline = new Date("2026-04-08T23:59:59+01:00");
+
+function checkDeadline() {
+
+const now = new Date();
+
+if (now > deadline) {
+
+ document.getElementById("submitButton").disabled = true;
+ document.getElementById("deadlineMessage").innerText =
+ "Entries are now CLOSED.";
+
+}
+
+}
+
+checkDeadline();
+
+
+const scriptURL = "https://script.google.com/macros/s/AKfycbyUqnG1FEFvk7ZmhL-IvgfIm6AYfDANoPF5PgolmdfVvlUIt4lGdzF2uQ8SyJEH8cwBYQ/exec";
+
+function submitEntry() {
+
+checkDeadline();
+
+if (new Date() > deadline) {
+ alert("Entries are closed.");
+ return;
+}
+
+let name = document.getElementById("playerName").value;
+
+let t1 = document.getElementById("tier1").value;
+let t2 = document.getElementById("tier2").value;
+let t3 = document.getElementById("tier3").value;
+let t4 = document.getElementById("tier4").value;
+let t5 = document.getElementById("tier5").value;
+let t6 = document.getElementById("tier6").value;
+
+if (!name || !t1 || !t2 || !t3 || !t4 || !t5 || !t6) {
+alert("Please complete all selections.");
+return;
+}
+
+let formData = new FormData();
+
+formData.append("Name", name);
+formData.append("Tier1", t1);
+formData.append("Tier2", t2);
+formData.append("Tier3", t3);
+formData.append("Tier4", t4);
+formData.append("Tier5", t5);
+formData.append("Tier6", t6);
+
+fetch(scriptURL, {
+ method: "POST",
+ body: formData
+})
+.then(response => {
+ alert("Picks submitted successfully! ⛳");
+})
+.catch(error => {
+ alert("Error submitting picks.");
+});
+
+}
+
+</script>
+
+</body>
+</html>
